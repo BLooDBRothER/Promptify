@@ -90,9 +90,8 @@ function createUniqueId() {
       try {
         let metaJson = require(`${rootPath}/${t}/metadata.json`);
         metaJson = metaJson[0];
-        if (!metaJson.prompt_id) {
-          metaJson.prompt_id = uuidv4();
-        }
+        if(metaJson.prompt_id) return;
+        metaJson.prompt_id = uuidv4();
         metaJson = [metaJson];
         metaJson = JSON.stringify(metaJson, null, 3);
         fs.writeFileSync(`${rootPath}/${t}/metadata.json`, metaJson);

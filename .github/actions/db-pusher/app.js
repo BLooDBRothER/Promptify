@@ -42,11 +42,13 @@ async function initMongo(mongoose, mongoURI) {
 
 async function inserter(file, cb) {
   try {
-    await text2text.updateOne(
+    console.log(file);
+    const res = await text2text.updateOne(
       { prompt_id: file.prompt_id },
       { $set: file },
       { upsert: true }
     );
+    console.log(res);
     cb(null);
   } catch (err) {
     cb(err);
